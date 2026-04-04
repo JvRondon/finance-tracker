@@ -1,0 +1,109 @@
+:root {
+  --bg-body: #f3f4f6;
+  --bg-card: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #6b7280;
+  --border-color: #e5e7eb;
+  --input-bg: #ffffff;
+}
+
+[data-theme='dark'] {
+  --bg-body: #111318;         
+  --bg-card: #1a1d24;         
+  --text-primary: #f8fafc;    
+  --text-secondary: #94a3b8;  
+  --border-color: #2a2d35;    
+  --input-bg: #111318;        
+}
+
+body {
+  background-color: var(--bg-body) !important;
+  color: var(--text-primary) !important;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.text-dark { color: var(--text-primary) !important; }
+.text-muted { color: var(--text-secondary) !important; }
+
+/* Cards & Modals */
+.card, .modal-content {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Navbar */
+[data-theme='dark'] .navbar {
+  background-color: var(--bg-body) !important;
+  border-bottom: 1px solid var(--border-color) !important;
+}
+
+/* Fixes for internal card backgrounds */
+[data-theme='dark'] .bg-white, 
+[data-theme='dark'] .bg-light {
+  background-color: var(--bg-card) !important;
+  border-color: var(--border-color) !important;
+}
+
+/* Form Inputs */
+.form-control, .form-select {
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border: 1px solid var(--border-color) !important;
+}
+
+.form-control:focus, .form-select:focus {
+  background-color: var(--input-bg) !important;
+  color: var(--text-primary) !important;
+  border-color: #8b5cf6 !important;
+  box-shadow: 0 0 0 1px #8b5cf6 !important;
+}
+
+/* Button Group Colors */
+[data-theme='dark'] .btn-danger {
+  background-color: #7f1d1d !important;
+  border-color: #991b1b !important;
+  color: #fecaca !important;
+}
+
+[data-theme='dark'] .btn-success {
+  background-color: #14532d !important;
+  border-color: #166534 !important;
+  color: #bbf7d0 !important;
+}
+
+[data-theme='dark'] .btn-outline-secondary {
+  color: var(--text-secondary) !important;
+  border-color: var(--border-color) !important;
+  background-color: transparent !important;
+}
+
+[data-theme='dark'] .btn-outline-secondary:hover {
+  background-color: var(--border-color) !important;
+  color: var(--text-primary) !important;
+}
+
+[data-theme='dark'] .badge.bg-success {
+  background-color: rgba(16, 185, 129, 0.1) !important;
+  color: #34d399 !important;
+  border: 1px solid rgba(16, 185, 129, 0.2) !important;
+}
+
+[data-theme='dark'] .badge.bg-secondary {
+  background-color: rgba(148, 163, 184, 0.1) !important;
+  color: #94a3b8 !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+}
+
+/* Fix for Recharts Tooltip */
+.recharts-default-tooltip {
+  background-color: var(--bg-card) !important;
+  border: 1px solid var(--border-color) !important;
+  color: var(--text-primary) !important;
+  border-radius: 8px;
+}
+
+::-webkit-scrollbar { width: 8px; }
+::-webkit-scrollbar-track { background: var(--bg-body); }
+::-webkit-scrollbar-thumb { background: var(--border-color); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: var(--text-secondary); }
