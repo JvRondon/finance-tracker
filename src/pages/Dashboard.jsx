@@ -27,11 +27,102 @@ const ICON_MAP = {
 // ==========================================
 const getBrandLogo = (name) => {
   const n = (name || '').toLowerCase();
+
+
+  // ==========================================
+  // 🎬 STREAMING (VÍDEO E MÚSICA)
+  // ==========================================
   if (n.includes('netflix')) return 'https://upload.wikimedia.org/wikipedia/commons/0/08/Netflix_2015_logo.svg';
   if (n.includes('spotify')) return 'https://storage.googleapis.com/pr-newsroom-wp/1/2023/05/Spotify_Primary_Logo_RGB_Green.png';
   if (n.includes('amazon') || n.includes('prime')) return 'https://upload.wikimedia.org/wikipedia/commons/f/f1/Prime_Video.png';
+  if (n.includes('crunchyroll')) return 'https://upload.wikimedia.org/wikipedia/commons/f/f6/Crunchyroll_Logo.svg';
+  if (n.includes('disney')) return 'https://upload.wikimedia.org/wikipedia/commons/3/3e/Disney%2B_logo.svg';
+  if (n.includes('hbo') || n.includes('max')) return 'https://upload.wikimedia.org/wikipedia/commons/c/ce/Max_logo.svg';
+  if (n.includes('youtube')) return 'https://upload.wikimedia.org/wikipedia/commons/0/09/YouTube_full-color_icon_%282017%29.svg';
+  if (n.includes('globoplay')) return 'https://upload.wikimedia.org/wikipedia/commons/4/42/Globoplay_logo.svg';
+  if (n.includes('star+')) return 'https://upload.wikimedia.org/wikipedia/commons/d/d3/Star%2B_logo.svg';
+  if (n.includes('paramount')) return 'https://upload.wikimedia.org/wikipedia/commons/1/1e/Paramount%2B_logo.svg';
+  if (n.includes('premiere')) return 'https://upload.wikimedia.org/wikipedia/commons/3/37/Premiere_Futebol.png';
+  if (n.includes('deezer')) return 'https://upload.wikimedia.org/wikipedia/commons/d/db/Deezer_logo.svg';
+  if (n.includes('apple')) return 'https://upload.wikimedia.org/wikipedia/commons/f/fa/Apple_logo_black.svg';
+  if (n.includes('twitch')) return 'https://upload.wikimedia.org/wikipedia/commons/2/26/Twitch_logo.svg';
+
+  // ==========================================
+  // 🎮 JOGOS E ENTRETENIMENTO
+  // ==========================================
+  if (n.includes('playstation') || n.includes('psn')) return 'https://upload.wikimedia.org/wikipedia/commons/0/00/PlayStation_logo.svg';
+  if (n.includes('xbox') || n.includes('game pass')) return 'https://upload.wikimedia.org/wikipedia/commons/d/d7/Xbox_logo_%282019%29.svg';
+  if (n.includes('steam')) return 'https://upload.wikimedia.org/wikipedia/commons/8/83/Steam_icon_logo.svg';
+  if (n.includes('nintendo')) return 'https://upload.wikimedia.org/wikipedia/commons/0/0d/Nintendo.svg';
+  if (n.includes('riot') || n.includes('valorant') || n.includes('league')) return 'https://upload.wikimedia.org/wikipedia/commons/e/e4/Riot_Games_logo_icon.png';
+  if (n.includes('epic games')) return 'https://upload.wikimedia.org/wikipedia/commons/3/31/Epic_Games_logo.svg';
+
+  // ==========================================
+  // 🍔 DELIVERY, TRANSPORTE E MOBILIDADE
+  // ==========================================
   if (n.includes('ifood')) return 'https://upload.wikimedia.org/wikipedia/commons/1/18/Ifood-logo.png';
   if (n.includes('uber')) return 'https://upload.wikimedia.org/wikipedia/commons/c/cc/Uber_logo_2018.png';
+  if (n.includes('99')) return 'https://upload.wikimedia.org/wikipedia/commons/4/41/99app_logo.png';
+  if (n.includes('rappi')) return 'https://upload.wikimedia.org/wikipedia/commons/0/01/Rappi_logo.svg';
+  if (n.includes('zé delivery') || n.includes('ze delivery')) return 'https://upload.wikimedia.org/wikipedia/commons/8/8e/Z%C3%A9_Delivery_logo.png';
+  if (n.includes('sem parar')) return 'https://upload.wikimedia.org/wikipedia/commons/f/f2/Sem_Parar_logo.png';
+  if (n.includes('veloe')) return 'https://upload.wikimedia.org/wikipedia/commons/1/13/Veloe_logo.png';
+  if (n.includes('buser')) return 'https://upload.wikimedia.org/wikipedia/commons/a/ab/Logo_Buser.png';
+
+  // ==========================================
+  // 📱 TELEFONIA E INTERNET
+  // ==========================================
+  if (n.includes('claro')) return 'https://upload.wikimedia.org/wikipedia/commons/4/41/Claro_logo.svg';
+  if (n.includes('vivo')) return 'https://upload.wikimedia.org/wikipedia/commons/3/30/Vivo_logo.svg';
+  if (n.includes('tim')) return 'https://upload.wikimedia.org/wikipedia/commons/4/40/TIM_logo.svg';
+  if (n.includes('oi')) return 'https://upload.wikimedia.org/wikipedia/commons/7/77/Oi_logo.svg';
+
+  // ==========================================
+  // 💻 SOFTWARE, NUVEM E INTELIGÊNCIA ARTIFICIAL
+  // ==========================================
+  if (n.includes('google') || n.includes('drive')) return 'https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg';
+  if (n.includes('microsoft') || n.includes('office') || n.includes('onedrive')) return 'https://upload.wikimedia.org/wikipedia/commons/4/44/Microsoft_logo.svg';
+  if (n.includes('adobe') || n.includes('photoshop')) return 'https://upload.wikimedia.org/wikipedia/commons/c/cb/Adobe_logo_and_wordmark.svg';
+  if (n.includes('canva')) return 'https://upload.wikimedia.org/wikipedia/commons/0/08/Canva_icon_2021.svg';
+  if (n.includes('notion')) return 'https://upload.wikimedia.org/wikipedia/commons/4/45/Notion_app_logo.png';
+  if (n.includes('chatgpt') || n.includes('openai')) return 'https://upload.wikimedia.org/wikipedia/commons/0/04/ChatGPT_logo.svg';
+  if (n.includes('dropbox')) return 'https://upload.wikimedia.org/wikipedia/commons/7/78/Dropbox_Icon.svg';
+  if (n.includes('github')) return 'https://upload.wikimedia.org/wikipedia/commons/9/91/Octicons-mark-github.svg';
+  if (n.includes('zoom')) return 'https://upload.wikimedia.org/wikipedia/commons/4/47/Zoom_Communications_Logo.svg';
+
+  // ==========================================
+  // 🛒 E-COMMERCE E COMPRAS
+  // ==========================================
+  if (n.includes('amazon') && !n.includes('prime')) return 'https://upload.wikimedia.org/wikipedia/commons/a/a9/Amazon_logo.svg';
+  if (n.includes('mercado livre') || n.includes('mercadolivre') || n.includes('meli')) return 'https://upload.wikimedia.org/wikipedia/commons/a/a9/MercadoLivre.svg';
+  if (n.includes('shopee')) return 'https://upload.wikimedia.org/wikipedia/commons/f/fe/Shopee_logo.svg';
+  if (n.includes('aliexpress')) return 'https://upload.wikimedia.org/wikipedia/commons/a/a2/AliExpress_logo.svg';
+  if (n.includes('magalu') || n.includes('magazine luiza')) return 'https://upload.wikimedia.org/wikipedia/commons/5/56/Magalu_logo.svg';
+  if (n.includes('americanas')) return 'https://upload.wikimedia.org/wikipedia/commons/a/af/Lojas_Americanas_logo.svg';
+
+  // ==========================================
+  // 🏦 BANCOS E FINANÇAS (Faturas/Taxas)
+  // ==========================================
+  if (n.includes('nubank')) return 'https://upload.wikimedia.org/wikipedia/commons/f/f7/Nubank_logo_2021.svg';
+  if (n.includes('inter')) return 'https://upload.wikimedia.org/wikipedia/commons/8/89/Banco_Inter_logo.png';
+  if (n.includes('itaú') || n.includes('itau')) return 'https://upload.wikimedia.org/wikipedia/commons/1/15/Itau_logo.svg';
+  if (n.includes('bradesco')) return 'https://upload.wikimedia.org/wikipedia/commons/1/1a/Bradesco_logo.svg';
+  if (n.includes('santander')) return 'https://upload.wikimedia.org/wikipedia/commons/b/b8/Banco_Santander_Logotipo.svg';
+  if (n.includes('caixa')) return 'https://upload.wikimedia.org/wikipedia/commons/e/ee/Caixa_Econ%C3%B4mica_Federal_logo.svg';
+
+  // ==========================================
+  // 🏋️ SAÚDE, EDUCAÇÃO E OUTROS
+  // ==========================================
+  if (n.includes('totalpass') || n.includes('total pass')) return 'https://logo.clearbit.com/totalpass.com.br';
+  if (n.includes('skyfit') || n.includes('sky fit')) return 'https://logo.clearbit.com/skyfitacademia.com.br';
+  if (n.includes('smart fit') || n.includes('smartfit')) return 'https://upload.wikimedia.org/wikipedia/commons/b/b3/Smart_Fit_logo.svg';
+  if (n.includes('gympass') || n.includes('wellhub')) return 'https://upload.wikimedia.org/wikipedia/commons/0/0d/Gympass_logo.png';
+  if (n.includes('academia')) return 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTQamZtFyOo--PFD5zvWgIfCOOZkqKc7INr9w&s';
+  if (n.includes('duolingo')) return 'https://upload.wikimedia.org/wikipedia/commons/1/15/Duolingo_logo.svg';
+  if (n.includes('alura')) return 'https://upload.wikimedia.org/wikipedia/commons/7/74/Alura_logo.svg';
+  if (n.includes('udemy')) return 'https://upload.wikimedia.org/wikipedia/commons/e/e3/Udemy_logo.svg';
+  
+  return null;
   
   // Exemplo de como adicionar um novo:
   // if (n.includes('academia')) return 'LINK_DA_IMAGEM_AQUI.png';
