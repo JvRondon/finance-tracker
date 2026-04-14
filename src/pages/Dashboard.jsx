@@ -123,11 +123,6 @@ const getBrandLogo = (name) => {
   if (n.includes('udemy')) return 'https://upload.wikimedia.org/wikipedia/commons/e/e3/Udemy_logo.svg';
   
   return null;
-  
-  // Exemplo de como adicionar um novo:
-  // if (n.includes('academia')) return 'LINK_DA_IMAGEM_AQUI.png';
-  
-  return null;
 };
 
 const MONTH_NAMES = ['Jan', 'Fev', 'Mar', 'Abr', 'Mai', 'Jun', 'Jul', 'Ago', 'Set', 'Out', 'Nov', 'Dez'];
@@ -151,8 +146,9 @@ const Dashboard = () => {
   const [editModalOpen, setEditModalOpen] = useState(false);
   const [editingData, setEditingData] = useState(null);
 
-  // ESTADO DA ABA DO EXTRATO (Corrente vs Crédito)
+  // ESTADO DA ABA DO EXTRATO (Corrente vs Crédito) E DO FILTRO (all, income, expense)
   const [extratoView, setExtratoView] = useState('corrente');
+  const [filterType, setFilterType] = useState('all');
 
   const selectedMonthStr = `${currentDate.getFullYear()}-${String(currentDate.getMonth() + 1).padStart(2, '0')}`;
   const monthLabel = currentDate.toLocaleString('pt-BR', { month: 'long', year: 'numeric' }).toUpperCase();
@@ -178,10 +174,19 @@ const Dashboard = () => {
   const creditTotal = creditExpenses.reduce((acc, curr) => acc + curr.amount, 0);
   const balance = totalIncome - paidExpenses;
 
-  // Arrays separados para exibição no extrato
-  const displayTransactions = extratoView === 'corrente' 
+  // ==========================================
+  // LÓGICA ATUALIZADA COM O FILTRO
+  // ==========================================
+  let displayTransactions = extratoView === 'corrente' 
     ? monthlyTransactions.filter(t => t.method !== 'Crédito') 
     : monthlyTransactions.filter(t => t.method === 'Crédito');
+
+  // Aplica o filtro de Entradas/Saídas (Apenas na aba de Conta Corrente)
+  if (filterType === 'income') {
+    displayTransactions = displayTransactions.filter(t => t.type === 'income');
+  } else if (filterType === 'expense') {
+    displayTransactions = displayTransactions.filter(t => t.type === 'expense');
+  }
 
   const expensesByCategory = useMemo(() => {
     const grouped = {};
@@ -330,7 +335,7 @@ const Dashboard = () => {
                   <Button variant={formType === 'expense' ? 'danger' : 'outline-secondary'} className="fw-bold" onClick={() => setFormType('expense')}><ArrowDownRight size={16} className="me-1"/> Saída</Button>
                   <Button variant={formType === 'income' ? 'success' : 'outline-secondary'} className="fw-bold" onClick={() => setFormType('income')}><ArrowUpRight size={16} className="me-1"/> Entrada</Button>
                 </ButtonGroup>
-<Form onSubmit={handleAddTransaction} className="d-flex flex-wrap align-items-end gap-2">
+                <Form onSubmit={handleAddTransaction} className="d-flex flex-wrap align-items-end gap-2">
                   
                   <div>
                     <label className="small text-muted mb-1" style={{fontSize: '0.75rem'}}>Data Compra</label>
@@ -399,18 +404,28 @@ const Dashboard = () => {
                 </Form>
               </div>
 
-              {/* BARRA DE FERRAMENTAS DO EXTRATO */}
+              {/* BARRA DE FERRAMENTAS DO EXTRATO E O NOVO FILTRO */}
               <div className="d-flex flex-wrap justify-content-between align-items-center mb-3 mt-4 gap-2">
                 
-                {/* ABAS: CONTA CORRENTE VS CARTÃO DE CRÉDITO */}
-                <ButtonGroup className="shadow-sm rounded-3">
-                  <Button variant={extratoView === 'corrente' ? 'dark' : 'outline-secondary'} size="sm" className="fw-bold px-3" onClick={() => setExtratoView('corrente')}>
-                    <Wallet size={14} className="me-2"/> Conta Corrente
-                  </Button>
-                  <Button variant={extratoView === 'credito' ? 'info' : 'outline-secondary'} size="sm" className="fw-bold px-3" onClick={() => setExtratoView('credito')}>
-                    <CreditCard size={14} className="me-2"/> Cartão de Crédito
-                  </Button>
-                </ButtonGroup>
+                <div className="d-flex flex-wrap align-items-center gap-2">
+                  <ButtonGroup className="shadow-sm rounded-3">
+                    <Button variant={extratoView === 'corrente' ? 'dark' : 'outline-secondary'} size="sm" className="fw-bold px-3" onClick={() => setExtratoView('corrente')}>
+                      <Wallet size={14} className="me-2"/> Conta Corrente
+                    </Button>
+                    <Button variant={extratoView === 'credito' ? 'info' : 'outline-secondary'} size="sm" className="fw-bold px-3" onClick={() => setExtratoView('credito')}>
+                      <CreditCard size={14} className="me-2"/> Cartão de Crédito
+                    </Button>
+                  </ButtonGroup>
+
+                  {/* NOVO FILTRO APLICADO AQUI */}
+                  {extratoView === 'corrente' && (
+                    <Form.Select size="sm" className="shadow-sm rounded-3 fw-bold" style={{ width: '140px', cursor: 'pointer' }} value={filterType} onChange={e => setFilterType(e.target.value)}>
+                      <option value="all">🔍 Ver Tudo</option>
+                      <option value="income">🟢 Só Entradas</option>
+                      <option value="expense">🔴 Só Saídas</option>
+                    </Form.Select>
+                  )}
+                </div>
 
                 <div className="d-flex gap-2">
                   <Button variant="outline-info" size="sm" className="fw-bold d-flex align-items-center gap-1" onClick={handlePullCreditInvoice}>
@@ -475,7 +490,7 @@ const Dashboard = () => {
           </Card>
         </Col>
 
-{/* RIGHT COLUMN: Analytics */}
+        {/* RIGHT COLUMN: Analytics */}
         <Col lg={4}>
           <Card className="border-0 shadow-sm rounded-4 mb-4">
             <Card.Body className="p-4">
