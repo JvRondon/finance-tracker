@@ -25,4 +25,7 @@ export default defineConfig({
       }
     })
   ],
+  build: {
+    chunkSizeWarningLimit: 1600, // Aumenta o limite do aviso para 1.6 MB
+  }
 })

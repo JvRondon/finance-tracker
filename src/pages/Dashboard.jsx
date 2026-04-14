@@ -422,10 +422,13 @@ const Dashboard = () => {
                 </div>
               </div>
 
-              <div className="d-flex flex-column gap-2">
+              {/* CONTAINER DA LISTA COM SCROLL INTERNO */}
+              <div className="d-flex flex-column gap-2 pe-2" style={{ maxHeight: '450px', overflowY: 'auto', overflowX: 'hidden' }}>
+                
                 {displayTransactions.length === 0 && (
                   <div className="text-center p-4 text-muted border rounded-3 bg-light">Nenhum lançamento encontrado nesta aba.</div>
                 )}
+                
                 {displayTransactions.sort((a,b) => new Date(b.date) - new Date(a.date)).map(t => {
                   const brandLogo = getBrandLogo(t.name);
                   const alertDue = t.type === 'expense' && t.method !== 'Crédito' && isDueSoon(t.dueDate, t.isPaid);
@@ -433,22 +436,22 @@ const Dashboard = () => {
                   return (
                     <div key={t.id} className={`d-flex align-items-center justify-content-between p-3 border rounded-3 bg-white ${alertDue ? 'border-warning shadow-sm' : ''}`} style={{ transition: 'all 0.2s ease' }}>
                       <div className="d-flex align-items-center gap-3" style={{ minWidth: '40%' }}>
-                        <div className="bg-light rounded-circle p-1 d-flex align-items-center justify-content-center" style={{ width: '45px', height: '45px', overflow: 'hidden' }}>
+                        <div className="bg-light rounded-circle p-1 d-flex align-items-center justify-content-center" style={{ width: '45px', height: '45px', overflow: 'hidden', flexShrink: 0 }}>
                           {brandLogo ? <img src={brandLogo} alt={t.name} style={{ width: '70%', height: '70%', objectFit: 'contain' }} /> : (ICON_MAP[t.icon] || <Tag size={20} className="text-muted"/>)}
                         </div>
-                        <div>
-                          <h6 className="mb-0 fw-bold text-dark d-flex align-items-center gap-2">
-                            {t.name} {t.isSubscription && <MonitorPlay size={12} style={{color: '#8b5cf6'}} />}
+                        <div style={{ overflow: 'hidden' }}>
+                          <h6 className="mb-0 fw-bold text-dark d-flex align-items-center gap-2 text-truncate">
+                            {t.name} {t.isSubscription && <MonitorPlay size={12} style={{color: '#8b5cf6', flexShrink: 0}} />}
                             {alertDue && <Badge bg="warning" text="dark" className="ms-2" style={{fontSize: '0.65rem'}}><AlertCircle size={10} className="me-1"/>Vence Logo</Badge>}
                           </h6>
                           <span className="text-muted small me-2">{t.date.split('-').reverse().join('/')}</span>
                           {t.dueDate && t.dueDate !== t.date && <span className="text-warning small me-2 fw-bold">• Vence: {t.dueDate.split('-').reverse().join('/')}</span>}
-                          <span className="text-muted small text-capitalize">• {t.category}</span>
+                          <span className="text-muted small text-capitalize d-none d-sm-inline">• {t.category}</span>
                         </div>
                       </div>
 
-                      <div className="d-flex align-items-center gap-4">
-                        <span className={`fw-bold ${t.type === 'income' ? 'text-success' : 'text-dark'}`} style={{ width: '100px', textAlign: 'right' }}>
+                      <div className="d-flex align-items-center gap-2 gap-md-4 flex-shrink-0">
+                        <span className={`fw-bold ${t.type === 'income' ? 'text-success' : 'text-dark'}`} style={{ width: '90px', textAlign: 'right' }}>
                           {t.type === 'income' ? '+' : '-'} R$ {t.amount.toFixed(2)}
                         </span>
                         
